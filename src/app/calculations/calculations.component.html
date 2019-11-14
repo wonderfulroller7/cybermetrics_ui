@@ -1,0 +1,138 @@
+<div fxLayout='row' class="zero">
+    <div fxFlex="5" class="one" ></div>
+    <div fxFlex="90" class="two" >
+        <h2>Index Calculation</h2>
+        <p>
+            We applied a fair bit of thought to how we wanted to calculate the index, 
+            our thinking guided by how we wanted the index to behave. Since we were 
+            going to track ‘going-up’, ‘going-down’ or ‘stayed-the-same’ for each of the questions, 
+            one obvious choice was to use a diffusion index type methodology 
+            (ie index value = [# gone-up + 50%* #stayed-the-same]) or some variation of the same.
+        </p>
+        <br/>
+        <p>
+            Another straightforward alternative was to give a weight or assign a numerical score 
+            to each type of response, and create an average (weighted or simple) of the responses 
+            to arrive at a single numerical score that will be the index. 
+            Conceptually this isn’t too different from the diffusion index methodology.
+        </p>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Range bound vs. random walk</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <p>The issue with both the above approaches was that the index would have stayed range bound, 
+                        i.e., theoretically it would always be in the 0 -100 range (if diffusion), or something 
+                        else similarly bounded. This would have provided a good comparison to the previous month, 
+                        but would not have allowed the kind of perspective we needed over time. In other words, 
+                        the diffusion or weighted average approaches would have resulted in relative values – 
+                        relative only to individual previous months – and would not have provided an absolute perspective over time.
+                    </p>
+                    <mat-list>
+                        For example, consider the following extreme sequence of events:
+                        <mat-list-item>- In December 100% of the respondents say ‘gone-up’ to all the questions. The index will be +100.</mat-list-item>
+                        <mat-list-item>- Then for the next 6 months (Jan – Jun) 100% of the respondents say ‘gone-down’ to all the questions. The index will show as 0 for each of the six months Jan-Jun.</mat-list-item>
+                        <mat-list-item>- In July, if all 100% say ‘gone-up’, the index will flip to +100.</mat-list-item>
+                    </mat-list>
+                    <p>
+                        The issue is that the +100 in July is not the same as the +100 
+                        in the December of the prior year because the 6 months of continued decline is ignored for the July index value.
+                    </p>
+                    <p>
+                        Comparing to a stock index, this would be akin to seeing the monthly returns, and not the absolute level of the index. In other words, consecutive monthly returns of –20%, +15%, –10%, 0%, +20%, –5% amount to index values (assuming a starting value of 100) of 80, 92, 82.8, 99.36, 94.39 respectively. The question we need to address is whether we want the -20%, +15%, -10%, 0%, +20%, -5% to be the index; or should it be the absolute values of 80, 92, 82.8, 99.36, 94.39 that allow much better comparison over time.
+                    </p>
+                    <p>
+                        We preferred the latter. To continue our example of Dec being +100; Jan-Jun 2011 being -100; and July being +100 as a diffusion index; and assuming we have set ‘gone-up’ = 15%, stayed-the-same = 0%, and gone-down = -15%; the absolute values would be 100 (beginning Dec), 115 (Dec end), 97.75 (Jan end), 83.09 (Feb end), 70.62 (Mar end), 60.03 (Apr end), 51.03 (May end), 43.37 (Jun end), 49.88 (Jul end).
+                    </p>
+                    <p>
+                        This is more useful; one can see that the cumulative index value is half at the end of July when compared to the beginning of Dec. And even with this approach, the relative changes across months are not lost, they are trackable as the first derivative of the cumulative index.
+                    </p>    
+                    <p>
+                        We also made an additional refinement at this point, which was to use continuous compounding. Assume we start a month with an index value of 100. We get one month of ‘gone-down’ followed by an immediately following month of ‘gone-up’. We would like to come back to a value of 100 if this happens, as the ‘gone-down’ has been offset by the ‘gone-up’.
+                    </p>        
+                    <p>
+                        Without using continuous compounding the index will go first from 100 to 85 [=100*(1 – 15%)]; and then to 97.75 [=85*(1 + 15%)]. Which is not the result we want, because we want the result to come back up to 100. Therefore, we use continuously compounded rates and not discrete rates. If we do that, the index will go from 100 to 86.07 [=e^(-0.15), or exp(-0.15) in Excel)] and back to 100 [=86.07*exp(0.15)]. If you are still reading, thank you.
+                    </p>
+                    <p>
+                        The ‘absolute’ version of the index provides another advantage – which is that the index is no longer predictable over time and follows a random walk based on a stationary process. Which is very similar to tradeable securities whose price can be anything, based only upon their previous value. Each month’s ‘returns’ (ie the responses) are the stationary process, and their integration into the higher level index is calculated as:
+                    </p>        
+                    <p>
+                        Where St represents the month’s responses converted to a percentage (explained below). ICSt is the ‘Index of Cyber Security’ at time t.
+                    </p>    
+                    <p>
+                        A higher index value indicates a perception of increasing risk, while a lower index value indicates the opposite.
+                    </p>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>Our approach</h4>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <mat-list>
+                        <span>In the end, the decision points were:</span>
+                        <mat-list-item>- Should the index be a relative range-bound number or an absolute accretive value comparable over time?</mat-list-item>
+                        <mat-list-item>- What arbitrary percentages (the 15% in the above) do we assign to up-moves and down-moves?</mat-list-item>
+                        <mat-list-item>- How many levels of up and downs do we create? Is a 5-level (Likert) scale better than a 3-level one?</mat-list-item>
+                        <mat-list-item>- Are the questions weighted equally, or is there an argument for differential weighting?</mat-list-item>
+                    </mat-list>
+                    <div>The approach to address all of the above was decided to be as follows: 
+                        <mat-vertical-stepper [linear]="isLinear" #stepper>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    Weigh each question equally and where a question has sub-questions, divide that question’s 
+                                    weight equally between them.
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    Use a Likert (5-level) scale; assign a number to each of the possible answers as follows.
+                                    These may be recalibrated after the first few months of the index.
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    Numerically add up the score from each of the questions and divide by the number of questions 
+                                    as to obtain a single score for a respondent.
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    Average all responses received to arrive at a single score for the month, say st.
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                        Average all responses received to arrive at a single score for the month, say st.
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    Calculate the new index value as: 
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    The initial value of the index at t=0 (which was March 2011) was considered as 1000. 
+                                </ng-template>
+                            </mat-step>
+                            <mat-step>                                        
+                                <ng-template matStepLabel>
+                                    Sub-indices, or information on constituent questions is released together with the main index,
+                                    but only to respondents through our monthly ‘detailed report’. 
+                                </ng-template>
+                            </mat-step>
+                        </mat-vertical-stepper>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div fxFlex="5" class="three" ></div>
+    
+</div>
