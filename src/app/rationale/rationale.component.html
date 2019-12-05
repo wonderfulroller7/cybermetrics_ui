@@ -34,9 +34,9 @@
                                 while published daily is of interest only to an esoteric community.
                             </p>
                             <mat-list>
-                                <h3 mat-subheader>For an index to be “really useful,” it needs to be able to do the following two things at the very least:</h3>
-                                <mat-list-item role="listitem">Risk managers should be able to use the index to hedge their risks</mat-list-item>
-                                <mat-list-item role="listitem">Investors should be able to take on exposure to the risks that the index incorporates,
+                                <span>For an index to be “really useful,” it needs to be able to do the following two things at the very least:</span>
+                                <mat-list-item>- Risk managers should be able to use the index to hedge their risks</mat-list-item>
+                                <mat-list-item>- Investors should be able to take on exposure to the risks that the index incorporates,
                                      and be rewarded for taking on the risk by those who do not desire such risk.</mat-list-item>
                             </mat-list>
                             <p>
@@ -52,7 +52,7 @@
                             </p>
                         </div>
                       </mat-expansion-panel>
-                      <mat-expansion-panel>
+                      <!-- <mat-expansion-panel>
                             <mat-expansion-panel-header>
                                 <h4>The nature of cybersecurity risks</h4>
                             </mat-expansion-panel-header>
@@ -64,11 +64,75 @@
                                     
                                 </div>
                             </mat-expansion-panel>
-                      </mat-expansion-panel>
+                      </mat-expansion-panel> -->
                       <mat-expansion-panel>
                             <mat-expansion-panel-header>
                                 <h4>Building the index</h4>
                             </mat-expansion-panel-header>
+                            <div>
+                                <p>
+                                    The first challenge – the construction of the security index – is not trivial and poses rather difficult issues given the lack of credible data upon which to base it. Prices for the illegal underground markets are difficult to get, whether directly or otherwise. Third party sources may neither be dependable over a period of time, nor be credible. Primary collection of data by directly accessing chat rooms or contacts with people who are engaged in illegal activities will not only be time consuming and unreliable, it is also probably legally risky. Companies that do collect & publish data are quickly tire of the activity. One simply cannot rely on such sources of data; the externally-based data route for calculating a cybersecurity index leads (and has repeatedly led) to a dead-end.
+                                </p>
+                                <p>
+                                    It is therefore proposed that the index be constructed using survey-based methodology. Survey based indices are common in the world of economics. Some of the most successful and reliable indicators of economic activity are survey based.
+                                </p>
+                                <div>
+                                    <h5>
+                                        The ISM Purchasing Managers’ Index
+                                    </h5>
+                                    <p>
+                                        The foremost is the Institute of Supply Management’s (ISM) Purchasing Manager Index (the PMI), which is published monthly and used with all seriousness by professional investors in guiding their decision making. The PMI is based upon a survey of about 300 purchasing managers, and different parts of the survey contribute to different “components” of the index. Each of the components is equally weighted to arrive at the overall PMI. The questions asked require non-numerical answers. For example, a question might be “Has the economic activity in question increased, decreased or remained the same?” The responses are converted to numbers using a method used for what are called “diffusion indices”. To quote an example verbatim from the ISM’s website, if the response is 20 percent “Better,” 70 percent “Same,” and 10 percent “Worse,” the Diffusion Index would be 55 percent (20% + [0.50 x 70%]). A reading of 50 percent indicates “no change” from the previous month, a reading of less than 50 indicates economic contraction, and a reading of more than 50 indicates expansion.
+                                    </p>
+                                    <p>
+                                        The PMI is one of the most influential economic indicators, and the fact that it is survey based does not diminish its credibility in any way. JP Morgan and Markit have collaborated with the ISM to produce what they call the “JPMorgan Global Services PMI”, which is a branded index backed by very respected market participants  
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5>
+                                        Consumer Confidence Indices – the Conference Board, and also Reuters/University of Michigan
+                                    </h5>
+                                    <p>
+                                        A variety of economic indicators published by the Conference Board are similarly based on a survey based methodology – an often quoted index being the Index of Consumer Confidence (CCI) which is based upon a survey of 5000 US households. They also publish a whole family of indices on the business cycle, labor markets etc.
+                                        The University of Michigan also publishes a similar “University of Michigan Consumer Sentiment Index” which is based upon telephonic surveys of 500 respondents. Each of the above indicators have been around for many decades each, and are considered credible and concrete by business and government alike
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5>
+                                        So why does a survey-based index make sense for an Index of Cyber Security?
+                                    </h5>
+                                    <mat-list>
+                                        <mat-list-item>
+                                            <span><b>1. Coverage of a wider range of risks:</b>
+                                            An index based on prices, botnet data, etc., is limited to certain kinds of risks. It will not cover newer risks that may arise, many of which may not have any price or attack data ever available – for example the risk of organized attacks on infrastructure by a sovereign nation. Or the risk of unsafe application development practices in the emerging world. A survey based approach can easily address such risks and any new risks that may arise.</span>
+                                        </mat-list-item>
+                                        <br/>
+                                        <mat-list-item>
+                                            <span><b>2. Better acceptance among industry:</b> An index produced without collaboration with industry professionals/CISOs may intrigue their curiosity, but may never get adopted. By involving 100 up to 300 CISOs or security practioners in a survey based process, we gain better acceptance of the index and adoption by their organizations as their participation means they are “invested” in the index.</span>
+                                        </mat-list-item>
+                                        <mat-list-item>
+                                            <span><b>3. Ease of maintenance:</b> By doing the survey monthly, and releasing the index on a defined date each month, we get rid of the need to maintain real-time data feeds and/or daily updates, thereby significantly reducing management overhead and the cost of index maintenance.</span>
+                                        </mat-list-item>
+                                        <mat-list-item>
+                                            <span><b>4. Sub-indices on specific risks:</b> The survey can be constructed to provide sub-indices, as well as an overall index relating to information security.</span>
+                                        </mat-list-item>
+                                        <mat-list-item>
+                                            <span><b>5. Practicality of implementation:</b> The infrastructure to record surveys, send out reminders, provide automated status reports on respondents lends itself to a web based tool; which we can build and sustain for a modest budget even out of limited resources.</span>
+                                        </mat-list-item>
+                                        <mat-list-item>
+                                            <span><b>6. Credibility:</b> The methodology will be clear and transparent, the math to convert survey data to an index is known, and given a reasonably large number of respondents, we can be fairly assured that any outlier responses will be diminished in importance.</span>
+                                        </mat-list-item>
+                                    </mat-list>
+                                </div>
+                                <div>
+                                    <h5>
+                                        Risk management using the Index
+                                    </h5>
+                                    <p>
+                                        We know (or can know, at least on a confidence interval basis) that a certain percentage of Junipers (picking on Juniper as an example) will be compromised causing some expected dollar loss. For the individual Juniper owner, the realized probability of the loss occurring will be binary – 0 or 1 – and not, for example, 0.03 ever. For the single company, the expected value is far less relevant than the worst case loss. Therefore what the Juniper owning company really wants is insurance, not unlike the house owner wanting to protect against fire. The only party truly exposed to the full distribution of the probability of house fires is the insurance company. 
+                                    </p>
+                                </div>
+
+                            </div>
                       </mat-expansion-panel>
                       <mat-expansion-panel>
                             <mat-expansion-panel-header>

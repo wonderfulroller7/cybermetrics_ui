@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
       type: 'linear',
       position: 'left',
       ticks: {
-        max: 8000,
+        max: 10000,
         min: 1000
       }
     }, {
@@ -79,6 +79,12 @@ export class HomePageComponent implements OnInit {
       console.log(this.lineChartData);
       this.chartReady = true;
     });
+
+    // this.metricService.getChartDataExploit('all').subscribe((res: any) =>{
+    //   this.lineChartData = res;
+    //   console.log(this.lineChartData);
+    //   this.chartReady = true;
+    // });
   }
 
   ngOnInit() {

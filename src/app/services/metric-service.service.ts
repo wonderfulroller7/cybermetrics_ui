@@ -36,6 +36,10 @@ export class MetricService {
     return this.httpClient.get(this.backendUrl + 'chartAllData/' + value);
   }
 
+  getChartDataExploit(value: string) {
+    return this.httpClient.get(this.backendUrl + 'chartAllDataExploit/' + value);
+  }
+
   getChartLabels() {
     return this.httpClient.get(this.backendUrl + 'getChartLabels');
   }

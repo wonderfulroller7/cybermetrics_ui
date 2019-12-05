@@ -1,39 +1,63 @@
-
-
-<div>
-    <!-- <span>Choose Date here : </span>
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <button mat-raised-button color="primary">Get Data</button> -->
-    <h4>Select Topic to compare</h4>
-    <mat-form-field>
-        <mat-label>Choose Item</mat-label>
-        <mat-select (selectionChange)="onChangedSort($event)">
-            <mat-option *ngFor="let item of items" [value]="item.value">
-            {{item.viewValue}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
-
-<div fxLayout='row' class="zero">
-    <div fxFlex="5" class="one" >
-    </div>
-    <div fxFlex="90" class="chart-wrapper" *ngIf="chartReady" class="two">
-        <canvas baseChart 
-            [datasets]="lineChartData" 
-            [labels]="lineChartLabels" 
-            [options]="lineChartOptions"
-            [colors]="lineChartColors" 
-            [legend]="lineChartLegend" 
-            [chartType]="lineChartType" 
-            [plugins]="lineChartPlugins">
-        </canvas>
-    </div>
-    <div fxFlex="5" class="three" >
-    </div>
-</div>
-  
+<mat-tab-group>
+    <mat-tab label="Index"> Content 1 </mat-tab>
+    <mat-tab label="Individual indexes">
+            <div>
+                    <h4>Select Topic to compare</h4>
+                    <mat-form-field>
+                        <mat-label>Choose Item</mat-label>
+                        <mat-select (selectionChange)="onChangedSort($event)">
+                            <mat-option *ngFor="let item of items" [value]="item.value">
+                            {{item.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout='row' class="zero">
+                    <div fxFlex="5" class="one" >
+                    </div>
+                    <div fxFlex="90" class="chart-wrapper" *ngIf="chartReady" class="two">
+                        <canvas baseChart 
+                            [datasets]="lineChartData" 
+                            [labels]="lineChartLabels" 
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors" 
+                            [legend]="lineChartLegend" 
+                            [chartType]="lineChartType" 
+                            [plugins]="lineChartPlugins">
+                        </canvas>
+                    </div>
+                    <div fxFlex="5" class="three" >
+                    </div>
+                </div>
+    </mat-tab>
+    <!-- <mat-tab label="CVE V2 Exploitable Score against Index">
+            <div>
+                    <h4>Select Topic to compare</h4>
+                    <mat-form-field>
+                        <mat-label>Choose Item</mat-label>
+                        <mat-select (selectionChange)="onChangedSort($event)">
+                            <mat-option *ngFor="let item of items" [value]="item.value">
+                            {{item.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout='row' class="zero">
+                    <div fxFlex="5" class="one" >
+                    </div>
+                    <div fxFlex="90" class="chart-wrapper" *ngIf="chartReady" class="two">
+                        <canvas baseChart 
+                            [datasets]="lineChartData" 
+                            [labels]="lineChartLabels" 
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors" 
+                            [legend]="lineChartLegend" 
+                            [chartType]="lineChartType" 
+                            [plugins]="lineChartPlugins">
+                        </canvas>
+                    </div>
+                    <div fxFlex="5" class="three" >
+                    </div>
+                </div>
+    </mat-tab> -->
+</mat-tab-group>
